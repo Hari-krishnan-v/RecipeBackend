@@ -6,7 +6,7 @@ const cors = require('cors');
 const translate = require('google-translate-api-x');
 
 const app = express();
-const IMAGE_DIR = join(__dirname, "../image_for _cuisines/data");
+const IMAGE_DIR = join(__dirname, "../public/image_for _cuisines/data");
 
 app.use(cors());
 app.use(express.json());
