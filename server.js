@@ -1,19 +1,17 @@
 const express = require('express');
-const { join } = require('node:path');
+const serverless = require('serverless-http');
+const { join } = require('path');
 const fs = require('fs-extra');
-
 const cors = require('cors');
 const translate = require('google-translate-api-x');
 
-
 const app = express();
-const PORT = 3000;
-const IMAGE_DIR = join(__dirname, "./image_for _cuisines/data");
+const IMAGE_DIR = join(__dirname, "../image_for _cuisines/data");
 
 app.use(cors());
 app.use(express.json());
 
-// Image serving route
+// Serve images
 app.get("/img/:partialName", (req, res) => {
     const partialName = req.params.partialName;
 
@@ -32,7 +30,7 @@ app.get("/img/:partialName", (req, res) => {
     });
 });
 
-// Translation route
+// Translation
 app.post('/translate', async (req, res) => {
     const { text, from, to } = req.body;
 
@@ -44,6 +42,5 @@ app.post('/translate', async (req, res) => {
         res.status(500).json({ error: 'Translation failed' });
     }
 });
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-});
+
+module.exports = serverless(app);
