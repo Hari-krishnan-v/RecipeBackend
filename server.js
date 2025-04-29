@@ -44,6 +44,7 @@ app.post('/translate', async (req, res) => {
         res.status(500).json({ error: 'Translation failed' });
     }
 });
+
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
